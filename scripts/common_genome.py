@@ -217,7 +217,7 @@ def get_seed_run_chain( path_newest ):
             break;
 
         f = open( path_seeds )
-        genomepath = f.readline()
+        genomepath = f.readline(5_000_000)
         if '/genome/agents/' in genomepath:
             path_curr = os.path.dirname( os.path.dirname(os.path.dirname( genomepath )) )
         else:

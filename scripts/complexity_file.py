@@ -10,7 +10,7 @@ def parse_complexities(path):
     retval = {}
 
     f = open(path, 'r')
-    line = f.readline()
+    line = f.readline(5_000_000)
 
     retval['version'] = version = get_version(line)
 
@@ -23,8 +23,8 @@ def parse_complexities(path):
     if version == 2:
         col_num = 0
         col_c = 1
-        retval['type'] = get_equals_decl(f.readline(), 'type')
-        f.readline() # skip column headers
+        retval['type'] = get_equals_decl(f.readline(5_000_000), 'type')
+        f.readline(5_000_000) # skip column headers
         retval['critter_numbers'] = critter_numbers = []
 
     retval['complexities'] = complexities = []
@@ -57,7 +57,7 @@ def write_avr(path):
 def parse_avr(path):
     f = open(path, 'r')
     
-    version = get_version(f.readline())
+    version = get_version(f.readline(5_000_000))
 
     types = {}
     typenames = []
@@ -69,7 +69,7 @@ def parse_avr(path):
 
             typenames.append(typename)
 
-            header = f.readline()
+            header = f.readline(5_000_000)
             fieldnames = header.split()[1:] # skip leading '#'
             
             fields = {}
@@ -78,7 +78,7 @@ def parse_avr(path):
                 fields[fname] = []
 
             while True:
-                line = f.readline()
+                line = f.readline(5_000_000)
                 tag = get_end_tag(line)
 
                 if tag:
@@ -96,7 +96,7 @@ def parse_avr(path):
                                'fields': fields}
 
     elif version == 1:
-        f.readline() # skip column headers
+        f.readline(5_000_000) # skip column headers
 
         typenames = common_complexity.DEFAULT_COMPLEXITIES
         fieldnames = common_complexity.AVR_FIELDS
@@ -109,7 +109,7 @@ def parse_avr(path):
                 type['fields'][field] = []
 
         while True:
-            data = f.readline().split()
+            data = f.readline(5_000_000).split()
             if len(data) == 0: break
 
             t = data.pop(0)
