@@ -7,6 +7,20 @@ import common_complexity
 ###
 ####################################################################################
 def parse_complexities(path):
+    """Parses complexities from a given file and returns a dictionary containing version, type, critter numbers, and complexities.
+    Parameters:
+        - path (str): Path to the file containing complexities.
+    Returns:
+        - dict: Dictionary containing version, type, critter numbers, and complexities.
+    Processing Logic:
+        - Opens the file and reads the first 5 million characters.
+        - Sets the version based on the first line.
+        - Sets the column number and critter numbers if the version is 2.
+        - Skips the column headers if the version is 2.
+        - Appends complexities to the complexities list.
+        - Closes the file.
+        - Returns the dictionary containing all the parsed information."""
+    
     retval = {}
 
     f = open(path, 'r')
@@ -47,6 +61,8 @@ def parse_complexities(path):
 ###
 ####################################################################################
 def write_avr(path):
+    """"""
+    
     pass
 
 ####################################################################################
@@ -55,6 +71,8 @@ def write_avr(path):
 ###
 ####################################################################################
 def parse_avr(path):
+    """"""
+    
     f = open(path, 'r')
     
     version = get_version(f.readline(5_000_000))
@@ -131,6 +149,8 @@ def parse_avr(path):
 ###
 ####################################################################################
 def write_plot_data(path, types, typenames, fieldnames):
+    """"""
+    
     f = open(path, 'w')
 
     for typename in typenames:
